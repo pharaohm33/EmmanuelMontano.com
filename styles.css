@@ -25,6 +25,23 @@ body {
   overflow-x: hidden;
 }
 
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  opacity: 0.67;
+  z-index: -1;
+}
+
 .noise {
   position: fixed;
   inset: 0;
@@ -55,9 +72,7 @@ h2 {
   justify-content: center;
   position: relative;
   padding: 6rem 1.5rem 4rem;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 15%, rgba(216, 178, 106, 0.14), transparent 60%),
-    var(--bg);
+  background: radial-gradient(ellipse 60% 50% at 50% 15%, rgba(216, 178, 106, 0.14), transparent 60%);
 }
 
 .hero-inner {
