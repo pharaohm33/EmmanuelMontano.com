@@ -24,6 +24,11 @@ const markInteracted = () => { userInteracted = true; };
 
 setTimeout(() => {
   if (!userInteracted) {
-    document.getElementById('join').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Instant, not smooth: an animated scroll can still be moving the page
+    // under a visitor's finger if they tap inside the beehiiv form right as
+    // it fires (touches inside a cross-origin iframe never reach this page's
+    // JS, so we can't detect/cancel a scroll that's colliding with a tap).
+    // An instant jump closes that window almost entirely.
+    document.getElementById('join').scrollIntoView({ behavior: 'auto', block: 'start' });
   }
 }, 2000);
