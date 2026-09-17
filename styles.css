@@ -81,6 +81,7 @@ h2 {
 }
 
 .portrait-wrap {
+  display: block;
   width: 168px;
   height: 168px;
   margin: 0 auto 2rem;
@@ -88,6 +89,18 @@ h2 {
   padding: 4px;
   background: linear-gradient(160deg, var(--accent), rgba(216, 178, 106, 0.15));
   box-shadow: 0 20px 60px -20px rgba(216, 178, 106, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.portrait-wrap:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 24px 70px -18px rgba(216, 178, 106, 0.45);
+}
+
+.name-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .portrait {
