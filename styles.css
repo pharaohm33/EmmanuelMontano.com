@@ -198,9 +198,21 @@ h2 {
   background: #17171b;
 }
 
+.link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
 .link-title {
   font-weight: 600;
   font-size: 1.02rem;
+}
+
+.link-sub {
+  font-size: 0.82rem;
+  color: var(--muted, #8a8a92);
+  font-weight: 400;
 }
 
 .link-arrow {
