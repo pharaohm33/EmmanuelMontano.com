@@ -14,7 +14,7 @@ revealEls.forEach((el) => io.observe(el));
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Auto-scroll to the email opt-in shortly after landing, unless the
+// Auto-scroll to the links list shortly after landing, unless the
 // visitor has already started scrolling/interacting on their own.
 let userInteracted = false;
 const markInteracted = () => { userInteracted = true; };
@@ -24,11 +24,6 @@ const markInteracted = () => { userInteracted = true; };
 
 setTimeout(() => {
   if (!userInteracted) {
-    // Instant, not smooth: an animated scroll can still be moving the page
-    // under a visitor's finger if they tap inside the beehiiv form right as
-    // it fires (touches inside a cross-origin iframe never reach this page's
-    // JS, so we can't detect/cancel a scroll that's colliding with a tap).
-    // An instant jump closes that window almost entirely.
-    document.getElementById('join').scrollIntoView({ behavior: 'auto', block: 'start' });
+    document.getElementById('links').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }, 2000);

@@ -251,21 +251,6 @@ h2 {
   background: var(--bg-elev);
 }
 
-/* ---------- Join (opt-in) ---------- */
-
-.join {
-  padding-top: 3.5rem;
-}
-
-.join-card {
-  max-width: 480px;
-  margin: 0 auto;
-  background: var(--ink);
-  border-radius: 20px;
-  padding: 0.5rem;
-  box-shadow: 0 30px 80px -30px rgba(216, 178, 106, 0.25);
-}
-
 /* ---------- Footer ---------- */
 
 .footer {
