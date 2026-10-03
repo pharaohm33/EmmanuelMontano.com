@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 
@@ -21,14 +21,14 @@
 
 <header class="hero" id="top">
   <div class="hero-inner reveal">
-    <a href="#join" class="portrait-wrap" aria-label="Scroll to email opt-in">
+    <a href="#text-me" class="portrait-wrap" aria-label="Scroll to text me">
       <img class="portrait" src="assets/emmanuel.jpg" alt="Emmanuel Montano" width="360" height="360">
     </a>
-    <a href="#join" class="name-link" aria-label="Scroll to email opt-in">
+    <a href="#text-me" class="name-link" aria-label="Scroll to text me">
       <h1 class="name">Emmanuel Montano</h1>
     </a>
     <p class="tagline">Helping investors close deals and creators grow their brand: real estate, funding, and content.</p>
-    <a href="#join" class="scroll-cue" aria-label="Scroll down">
+    <a href="#text-me" class="scroll-cue" aria-label="Scroll down">
       <span></span>
     </a>
   </div>
@@ -36,24 +36,29 @@
 
 <main>
 
-  <section class="section join" id="join">
+  <section class="section textme" id="text-me">
     <div class="section-inner">
-      <div class="join-card reveal">
-        <!--
-          BEEHIIV EMBED — emmanuelmontano.beehiiv.com
-          This form itself contains the "What do you need help with?" poll question.
-          Each answer applies a tag (and, if configured, a redirect) inside beehiiv's
-          dashboard — no extra logic needed here. Update the form there any time.
-        -->
-        <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="4c9d82ed-0830-47ef-a046-1a6f11cff02a"></script>
+      <div class="reveal">
+        <div class="textme-card">
+          <p class="textme-eyebrow">Skip the forms</p>
+          <h2 class="textme-title">Text Me What You Need</h2>
+          <p class="textme-sub">Real estate, funding, content &mdash; tell me what you&rsquo;re working on and I&rsquo;ll text you back.</p>
+          <a class="textme-btn" href="#links" data-p="465e5b4651585c5e595a4756">
+            <span class="textme-btn-label">Tap to Text Me</span>
+          </a>
+        </div>
       </div>
+      <a class="more-cue reveal" href="#links">
+        <span>10 ways to work with me</span>
+        <span class="more-chevron" aria-hidden="true">&darr;</span>
+      </a>
     </div>
   </section>
 
   <section class="section" id="links">
     <div class="section-inner">
       <h2 class="reveal">Choose Your Next Step</h2>
-      <p class="link-count reveal">10 ways to work with me &mdash; scroll to see them all</p>
+      <p class="link-count reveal">Pick what fits &mdash; there are 10 options, scroll to see them all</p>
       <div class="link-list">
         <a class="link-row reveal" href="https://buy.stripe.com/14keYcbNb7m3dHicMY" target="_blank" rel="noopener">
           <span class="link-num">1</span>
@@ -111,7 +116,7 @@
           <span class="link-title">Pro Audio</span>
           <span class="link-arrow">&rarr;</span>
         </a>
-        <a class="link-row reveal" href="https://blinq.me/SuD7MVgInXsxZ1vIJE2X" target="_blank" rel="noopener">
+        <a class="link-row reveal" href="#text-me" data-p="465e5b4651585c5e595a4756">
           <span class="link-num">10</span>
           <span class="link-title">Contact Me</span>
           <span class="link-arrow">&rarr;</span>
@@ -138,6 +143,6 @@
   <p>&copy; <span id="year"></span> Emmanuel Montano</p>
 </footer>
 
-<script src="script.js?v=5"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>

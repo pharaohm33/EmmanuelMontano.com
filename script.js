@@ -14,7 +14,7 @@ revealEls.forEach((el) => io.observe(el));
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Auto-scroll to the email opt-in shortly after landing, unless the
+// Auto-scroll to the text-me CTA shortly after landing, unless the
 // visitor has already started scrolling/interacting on their own.
 let userInteracted = false;
 const markInteracted = () => { userInteracted = true; };
@@ -24,67 +24,33 @@ const markInteracted = () => { userInteracted = true; };
 
 setTimeout(() => {
   if (!userInteracted) {
-    // Instant, not smooth: an animated scroll can still be moving the page
-    // under a visitor's finger if they tap inside the beehiiv form right as
-    // it fires (touches inside a cross-origin iframe never reach this page's
-    // JS, so we can't detect/cancel a scroll that's colliding with a tap).
-    // An instant jump closes that window almost entirely.
-    document.getElementById('join').scrollIntoView({ behavior: 'auto', block: 'start' });
+    document.getElementById('text-me').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }, 2000);
 
-// After a visitor subscribes via the beehiiv embed, scroll them down to the
-// full links list. The form itself is a cross-origin iframe, so the only
-// way to know it was submitted is a postMessage from beehiiv's domain.
-// Known routine messages observed from the embed: the bare string
-// "childReady" and { type: "beehiiv:child-loaded", payload: { src: ... } }
-// (fired repeatedly as the iframe resizes) — neither means a submission.
-// IMPORTANT: only inspect the `type` field, never the whole stringified
-// payload — the child-loaded payload's `src` field contains the literal
-// substring "subscribe-forms.beehiiv.com", which would false-match a naive
-// "subscribe" search on every routine load/resize ping.
-// There's no public spec for the real submit event's type, so this matches
-// broadly on common success/subscribe wording. If it doesn't fire on an
-// actual test subscribe, capture the real event.data via devtools and
-// tighten this match to it.
-window.addEventListener('message', (event) => {
-  if (!/beehiiv/i.test(event.origin)) return;
-  let payload = event.data;
-  if (typeof payload === 'string') {
-    try { payload = JSON.parse(payload); } catch (err) { /* keep as string */ }
+// The phone number never appears in the page source: it's stored XOR-encoded
+// in data-p (on the big CTA button and the bottom "Contact Me" row) and only
+// decoded when someone taps one. This keeps it away from simple HTML
+// scrapers; it is obfuscation, not real secrecy, since anything a browser can
+// decode a JS-running bot could too.
+const KEY = 'montano';
+const decode = (hex) => {
+  let out = '';
+  for (let i = 0; i < hex.length; i += 2) {
+    out += String.fromCharCode(parseInt(hex.slice(i, i + 2), 16) ^ KEY.charCodeAt((i / 2) % KEY.length));
   }
-  const type = typeof payload === 'string' ? payload : (payload && payload.type) || '';
-  if (/child-?ready|child-?loaded|resize|height/i.test(type)) return;
-  if (/subscribe|success|submit/i.test(type)) {
-    document.getElementById('links').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-});
+  return out;
+};
 
-// beehiiv's loader.js builds the form iframe itself, so we don't control
-// that URL directly. If a visitor's browser has an old cached copy of it
-// (e.g. right after editing the form in beehiiv), force a fresh fetch by
-// tagging the iframe src with a cache-busting param the moment it appears.
-// This only clears a visitor's own browser cache — if the form still looks
-// outdated after this, beehiiv's own CDN is serving a stale version and
-// needs to catch up on their end (check for a publish/save step there).
-const joinCard = document.querySelector('.join-card');
-if (joinCard) {
-  // Poll rather than use a MutationObserver: beehiiv's loader sets the
-  // iframe's src sometime after inserting it, so a childList/attribute
-  // observer can miss the final URL depending on load timing.
-  let attempts = 0;
-  const tryBust = () => {
-    const iframe = joinCard.querySelector('iframe');
-    if (iframe && iframe.src && /beehiiv/i.test(iframe.src)) {
-      try {
-        const url = new URL(iframe.src);
-        url.searchParams.set('cb', Date.now());
-        iframe.src = url.toString();
-      } catch (err) { /* malformed URL, leave it alone */ }
-      return;
-    }
-    attempts += 1;
-    if (attempts < 40) setTimeout(tryBust, 250);
-  };
-  tryBust();
-}
+document.querySelectorAll('[data-p]').forEach((el) => {
+  el.addEventListener('click', (event) => {
+    event.preventDefault();
+    const num = decode(el.dataset.p);
+    const digits = num.replace(/\D/g, '').slice(-10);
+    const pretty = `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+    // Show the number too: sms: links do nothing on many desktops.
+    const label = el.querySelector('.textme-btn-label, .link-title');
+    if (label) label.textContent = `Text ${pretty}`;
+    window.location.href = `sms:${num}`;
+  });
+});

@@ -171,6 +171,10 @@ h2 {
 
 /* ---------- Link list ---------- */
 
+#links {
+  padding-top: 2.5rem;
+}
+
 .link-count {
   text-align: center;
   color: var(--ink-dim);
@@ -276,19 +280,116 @@ h2 {
   background: var(--bg-elev);
 }
 
-/* ---------- Join (opt-in) ---------- */
+/* ---------- Text-me CTA ---------- */
 
-.join {
+.textme {
   padding-top: 3.5rem;
+  padding-bottom: 0.5rem;
 }
 
-.join-card {
+.textme-card {
   max-width: 480px;
   margin: 0 auto;
-  background: var(--ink);
-  border-radius: 20px;
-  padding: 0.5rem;
-  box-shadow: 0 30px 80px -30px rgba(216, 178, 106, 0.25);
+  padding: 2rem 1.5rem 1.9rem;
+  text-align: center;
+  border-radius: 22px;
+  border: 1px solid rgba(216, 178, 106, 0.6);
+  background: linear-gradient(160deg, rgba(216, 178, 106, 0.18), rgba(18, 18, 21, 0.92) 60%);
+  animation: textme-glow 2.6s ease-in-out infinite, textme-float 5s ease-in-out infinite;
+}
+
+.textme-eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section .textme-title {
+  margin: 0 0 0.6rem;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+}
+
+.textme-sub {
+  margin: 0 0 1.5rem;
+  color: var(--ink-dim);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.textme-btn {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  animation: textme-pulse 2s ease-in-out infinite;
+}
+
+.textme-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: textme-shimmer 3s ease-in-out infinite;
+}
+
+.more-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 1.75rem auto 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.more-chevron {
+  color: var(--accent);
+  font-size: 1.4rem;
+  line-height: 1;
+  animation: more-bounce 1.4s ease-in-out infinite;
+}
+
+@keyframes textme-glow {
+  0%, 100% { box-shadow: 0 0 18px rgba(216, 178, 106, 0.25), 0 0 50px rgba(216, 178, 106, 0.12); }
+  50% { box-shadow: 0 0 36px rgba(216, 178, 106, 0.6), 0 0 100px rgba(216, 178, 106, 0.3); }
+}
+
+@keyframes textme-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes textme-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes textme-shimmer {
+  0%, 55% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+@keyframes more-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .textme-card, .textme-btn, .textme-btn::after, .more-chevron { animation: none; }
+  .textme-card { box-shadow: 0 0 36px rgba(216, 178, 106, 0.4); }
 }
 
 /* ---------- Footer ---------- */
