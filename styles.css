@@ -236,6 +236,12 @@ h2 {
   flex: 1;
 }
 
+.link-price {
+  margin-left: 0.25rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
 .link-sub {
   font-size: 0.82rem;
   color: var(--muted, #8a8a92);
