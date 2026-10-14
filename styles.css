@@ -121,7 +121,47 @@ h2 {
   color: var(--ink-dim);
   font-size: 1rem;
   line-height: 1.6;
-  margin: 0 0 3rem;
+  margin: 0 0 1rem;
+}
+
+.tagline-main {
+  display: block;
+  color: var(--ink);
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 0.45rem;
+  text-wrap: balance;
+}
+
+.tagline-services {
+  display: block;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+.tagline-services i {
+  font-style: normal;
+  margin: 0 0.3rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 420px) {
+  .tagline-services { font-size: 0.86rem; }
+  .tagline-services i { margin: 0 0.18rem; }
+}
+
+.tagline .nw { white-space: nowrap; }
+
+.tagline-sub {
+  color: var(--ink-dim);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0 auto 3rem;
+  max-width: 420px;
+  opacity: 0.85;
 }
 
 .scroll-cue {
